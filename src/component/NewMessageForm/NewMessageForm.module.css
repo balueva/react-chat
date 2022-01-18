@@ -1,0 +1,38 @@
+.newMessage {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    color: rgb(95, 86, 86);
+}
+
+
+    .newMessage > textarea {
+      width: 100%;
+      border: 1px solid gray;
+      color: inherit;
+      padding: 10px;
+      outline: none;
+    }
+
+    .newMessage > textarea:hover {
+        outline: none;
+    }
+
+    .newMessage > button {
+      margin-left: 10px;
+      align-self: center;
+
+      padding: 10px;
+      border: 1px solid gray;
+      color: inherit;
+    }
+
+    .newMessage > button:hover:enabled {
+        opacity: 0.7;
+    }
+
+    .newMessage > button[disabled] {
+      border: 1px solid lightgrey;
+      color: lightgrey;
+    }
