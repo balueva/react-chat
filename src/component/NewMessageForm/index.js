@@ -1,10 +1,15 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useRef } from 'react';
 import styles from './NewMessageForm.module.css';
 import { AUTHOR_USER } from '../../const';
+
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import SendIcon from '@mui/icons-material/Send';
 
 export const NewMessageForm = ({ addMessage }) => {
 
     const [textareaValue, setTextareaValue] = useState('');
+    const refTextarea = useRef(null);
 
     /*
     const onTextareaChange = (event) => {
@@ -21,14 +26,20 @@ export const NewMessageForm = ({ addMessage }) => {
 
         addMessage(AUTHOR_USER, textareaValue);
         setTextareaValue('');
+
+        refTextarea.current?.focus();
     }
 
     return (
         <form className={styles.newMessage} onSubmit={onAddMessage}>
-            <textarea rows='5' value={textareaValue} onChange={onTextareaChange}></textarea>
-            <button type='submit' disabled={textareaValue ? false : true}>
-                Отправить
-            </button>
+            <TextField inputRef={refTextarea}
+                id='outlined-multiline-flexible' multiline rows={3} variant='standard' fullWidth
+                color='success'
+                value={textareaValue} onChange={onTextareaChange} autoFocus
+            />
+            <IconButton type='submit' color='success' disabled={textareaValue ? false : true}>
+                <SendIcon />
+            </IconButton>
         </form>
     )
 }

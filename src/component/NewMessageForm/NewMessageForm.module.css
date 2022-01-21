@@ -3,20 +3,11 @@
     padding: 10px;
     display: flex;
     justify-content: space-between;
-    color: rgb(95, 86, 86);
 }
 
 
     .newMessage > textarea {
-      width: 100%;
-      border: 1px solid gray;
-      color: inherit;
       padding: 10px;
-      outline: none;
-    }
-
-    .newMessage > textarea:hover {
-        outline: none;
     }
 
     .newMessage > button {
@@ -24,8 +15,7 @@
       align-self: center;
 
       padding: 10px;
-      border: 1px solid gray;
-      color: inherit;
+      border: 1px solid green;
     }
 
     .newMessage > button:hover:enabled {
@@ -34,5 +24,6 @@
 
     .newMessage > button[disabled] {
       border: 1px solid lightgrey;
-      color: lightgrey;
     }
+
+    

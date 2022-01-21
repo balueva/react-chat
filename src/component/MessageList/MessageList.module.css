@@ -5,4 +5,12 @@
     overflow-x: hidden;
     flex-grow: 1;
     width: 100%;
+    background-color: rgba(222, 254, 222, 0.4);
+}
+
+.bottom {
+    border: none;
+    padding: 0;
+    margin: 0;
+    height: 1px;
 }
