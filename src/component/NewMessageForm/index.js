@@ -11,12 +11,6 @@ export const NewMessageForm = ({ addMessage }) => {
     const [textareaValue, setTextareaValue] = useState('');
     const refTextarea = useRef(null);
 
-    /*
-    const onTextareaChange = (event) => {
-        setTextareaValue(event.target.value);
-    };
-*/
-
     const onTextareaChange = useCallback((event) => {
         setTextareaValue(event.target.value)
     }, []);
