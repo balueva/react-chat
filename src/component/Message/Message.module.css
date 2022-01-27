@@ -1,12 +1,14 @@
 .message {
-    padding: 5px;
     margin: 10px;
-    border: 1px solid lightgreen;
+    max-width: fit-content;
 }     
-    
-.message > span {
-    font-size: 12px;
-    color: green;
-    font-weight: bold;
+
+.message > div:last-child {
+    padding-bottom: 16px;
+}
+
+
+.text {
+    padding: 10px 0;
 }
     

@@ -8,10 +8,29 @@
   height: 100vh;
   width: 100%;
   display: flex;
+  justify-content: space-between;
+}
+
+.chatlistarea {
+  height: 100%;
+  width: 560px;
+  min-width: 220px;
+  display: flex;
   flex-direction: column;
+ /* justify-content: space-between;*/
 }
 
-.messages {
-  border: 1px solid red;
+.chatarea {
+  height: 100%;
+  width: 100%;  
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
+.menu {
+  background-color: rgb(218, 218, 218);
+  padding: 10px 0;
+  width: 100%;
+}
