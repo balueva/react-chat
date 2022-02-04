@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { ChatList, NewChatForm } from '../../component';
+import { ChatList, NewChatForm, MenuChatList } from '../../component';
 import { Chat } from '../../routes';
 import { useParams } from 'react-router-dom';
-import { AppBar, Toolbar, IconButton, Box } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import SearchIcon from '@mui/icons-material/Search';
 
 import { getChatList, addChatAction, deleteChatAction } from '../../store/chatList';
 import { useDispatch, useSelector } from 'react-redux';
@@ -43,29 +40,18 @@ export const Chats = () => {
         dispatch(deleteMessagesByChatIdAction(deletedId));
     };
 
-    const chatArea = () => {
-        return chat ? <Chat chat={chat} /> : <div>No Chat</div>;
-    }
 
     return (
         <div className='chats'>
             <div className='chatlistarea'>
-                <AppBar position='static' color='success'>
-                    <Toolbar>
-                        <Box sx={{ flexGrow: 1 }} />
-                        <IconButton color='inherit'>
-                            <SearchIcon />
-                        </IconButton>
-                        <IconButton color='inherit' onClick={onAddClick}>
-                            <AddIcon />
-                        </IconButton>
-                    </Toolbar>
-                </AppBar>
+                <MenuChatList onAddChatClick={onAddClick}></MenuChatList>
                 <NewChatForm addChat={addChat} cancelAddChat={cancelAddChat} visible={visibleNewChatForm}></NewChatForm>
                 <ChatList selectedChatId={chat ? chat.id : -1} deleteChat={deleteChat}></ChatList>
             </div>
             <div className='chatarea'>
-                {chatArea()}
+                {
+                    (chat && <Chat chat={chat} />) || (!chat && <div>No Chat</div>)
+                }
             </div>
         </div>
     );

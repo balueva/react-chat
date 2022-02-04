@@ -1,6 +1,8 @@
+import { ADD_TIMERID, DELETE_TIMERID } from '.';
 import { ADD_MESSAGE, DELETE_MESSAGES_BYCHATID } from './actions';
 
-const initialState = { messageList: { '1': [{ id: 1, text: 'aaa', author: 'aaaa', date: 'asd' }] } };
+//const initialState = { messageList: { '1': [{ id: 1, text: 'aaa', author: 'aaaa', date: 'asd' }] } };
+const initialState = { messageList: {}, timerId: 0 };
 
 export const messageListReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -21,7 +23,8 @@ export const messageListReducer = (state = initialState, action) => {
             }
             else return state;
         }
-
+        case ADD_TIMERID: return { ...state, timerId: action.payload }
+        case DELETE_TIMERID: return { ...state, timerId: 0 }
         default: return state;
     }
 }
