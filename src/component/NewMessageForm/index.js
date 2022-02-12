@@ -5,11 +5,17 @@ import { AUTHOR_USER } from '../../const';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import SendIcon from '@mui/icons-material/Send';
+import { useEffect } from 'react';
 
 export const NewMessageForm = ({ addMessage }) => {
 
     const [textareaValue, setTextareaValue] = useState('');
     const refTextarea = useRef(null);
+
+    useEffect(() => {
+        console.log('focus');
+        refTextarea.current?.focus();
+    }, [addMessage]);
 
     const onTextareaChange = useCallback((event) => {
         setTextareaValue(event.target.value)
@@ -29,7 +35,7 @@ export const NewMessageForm = ({ addMessage }) => {
             <TextField inputRef={refTextarea}
                 id='outlined-multiline-flexible' multiline rows={3} variant='standard' fullWidth
                 color='success'
-                value={textareaValue} onChange={onTextareaChange} autoFocus
+                value={textareaValue} onChange={onTextareaChange}
             />
             <IconButton type='submit' color='success' disabled={textareaValue ? false : true}>
                 <SendIcon />

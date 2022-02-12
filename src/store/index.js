@@ -2,6 +2,8 @@ import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import { profileReducer } from './profile';
 import { chatListReducer } from './chatList';
 import { messageListReducer } from './messageList';
+import { weatherReducer } from './weather';
+
 import thunk from 'redux-thunk';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // localStorage
@@ -18,7 +20,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
     profileReducer,
     chatListReducer,
-    messageListReducer
+    messageListReducer,
+    weatherReducer
 });
 
 // оборачиваем редьюсеры в persist
