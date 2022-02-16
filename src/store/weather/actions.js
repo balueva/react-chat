@@ -19,8 +19,6 @@ export const setIsLoadingAction = (isLoading) => ({
     payload: isLoading
 });
 
-const WEATHER_API = '';
-
 export const getWeaherWithThunk = (city, beginDate, endDate) => async (dispatch, getState) => {
     dispatch(setErrorAction(false));
     dispatch(setIsLoadingAction(true));

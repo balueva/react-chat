@@ -1,4 +1,4 @@
-import { SET_DATA_WEATHER, SET_ERROR_WEATHER, SET_ISLOADING_WEATHER } from ".";
+import { SET_DATA_WEATHER, SET_ERROR_WEATHER, SET_ISLOADING_WEATHER } from '.';
 
 const initialState = { data: {}, error: false, isLoading: false }
 

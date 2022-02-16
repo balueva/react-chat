@@ -1,5 +1,5 @@
 import { AUTHOR_BOT } from '../../const';
-import { v4 as uuidv4 } from 'uuid';
+import { messagesRef } from '../../firebase';
 
 import { getTimerId } from './selectors';
 
@@ -9,9 +9,9 @@ export const DELETE_MESSAGES_BYCHATID = 'MESSAGE_LIST::DELETE_MESSAGES_BYCHATID'
 export const ADD_TIMERID = 'MESSAGE_LIST::ADD_TIMERID';
 export const DELETE_TIMERID = 'MESSAGE_LIST::DELETE_TIMERID';
 
-export const addMessageAction = (chatId, author, text) => ({
+export const addMessageAction = (chatId, message) => ({
     type: ADD_MESSAGE,
-    payload: { chatId: chatId, message: { id: uuidv4(), author: author, text: text, date: Date.now() } }
+    payload: { chatId: chatId, message: message }
 });
 
 export const deleteMessagesByChatIdAction = (chatId) => ({
@@ -27,14 +27,14 @@ export const deleteTimer = (dispatch, getState) => {
     }
 }
 
-export const addMessageWithThunkAction = (chatId, author, text) => (dispatch, getState) => {
+export const addMessageWithThunkAction = (chatId, message) => (dispatch, getState) => {
     deleteTimer(dispatch, getState);
 
-    dispatch(addMessageAction(chatId, author, text));
+    dispatch(addMessageAction(chatId, message));
 
-    if (author !== AUTHOR_BOT) {
+    if (message.author !== AUTHOR_BOT) {
         const timerId = setTimeout(() => {
-            dispatch(addMessageAction(chatId, AUTHOR_BOT, `Hello! It's a ${AUTHOR_BOT}`));
+            dispatch(addMessageCommand(chatId, AUTHOR_BOT, `Hello! It's a ${AUTHOR_BOT}`));
         }, 1500);
         dispatch(addTimerIdAction(timerId));
     }
@@ -49,3 +49,22 @@ export const deleteTimerIdAction = () => ({
     type: DELETE_TIMERID,
     payload: 0
 });
+
+
+export const addMessageCommand = (chatId, author, text) => (dispatch) => {
+    messagesRef.child(chatId).push({ author: author, text: text, date: Date.now() }, error => {
+        if (error)
+            console.log(error);
+    })
+}
+
+export const addMessageTracker = (chatId) => (dispatch) => {
+    messagesRef.child(chatId).on('child_added', snapshot => {
+        dispatch(addMessageWithThunkAction(chatId, { ...snapshot.val(), id: snapshot.key }));
+    })
+}
+
+export const addMessageOffTracker = (chatId) => (dispatch) => {
+    dispatch(deleteMessagesByChatIdAction(chatId));
+    messagesRef.child(chatId).off('child_added');
+}
