@@ -1,5 +1,6 @@
-import { ADD_CHAT, DELETE_CHAT, SET_SELECTED_CHAT } from './actions';
+import { ADD_CHAT, DELETE_CHAT } from './actions';
 
+/*
 const initialSate = {
     chatList: [{ id: '1', caption: 'Школа 2В', statusStr: 'Класс 2В', isGroup: true, avatar: '' },
     { id: '2', caption: 'Школа 2В родители', statusStr: 'Класс 2В только родители', isGroup: true, avatar: 'panda.jpg' },
@@ -9,6 +10,8 @@ const initialSate = {
     { id: '6', caption: 'Вадим', statusStr: '', isGroup: false, avatar: '' },
     { id: '7', caption: 'Ольга', statusStr: '', isGroup: false, avatar: '' }]
 };
+*/
+const initialSate = { chatList: [] };
 
 export const chatListReducer = (state = initialSate, action) => {
     switch (action.type) {
