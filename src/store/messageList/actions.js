@@ -19,13 +19,22 @@ export const deleteMessagesByChatIdAction = (chatId) => ({
     payload: chatId
 });
 
+export const deleteTimer = (dispatch, getState) => {
+    const timerId = getTimerId(getState());
+    if (timerId > 0) {
+        clearTimeout(timerId);
+        dispatch(deleteTimerIdAction());
+    }
+}
+
 export const addMessageWithThunkAction = (chatId, author, text) => (dispatch, getState) => {
+    deleteTimer(dispatch, getState);
+
     dispatch(addMessageAction(chatId, author, text));
 
     if (author !== AUTHOR_BOT) {
         const timerId = setTimeout(() => {
             dispatch(addMessageAction(chatId, AUTHOR_BOT, `Hello! It's a ${AUTHOR_BOT}`));
-            dispatch(deleteTimerIdWithThunkAction());
         }, 1500);
         dispatch(addTimerIdAction(timerId));
     }
@@ -40,12 +49,3 @@ export const deleteTimerIdAction = () => ({
     type: DELETE_TIMERID,
     payload: 0
 });
-
-export const deleteTimerIdWithThunkAction = () => (dispatch, getState) => {
-    const timerId = getTimerId(getState());
-
-    if (timerId > 0) {
-        clearTimeout(timerId);
-        dispatch(deleteTimerIdAction());
-    }
-}
