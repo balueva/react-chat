@@ -3,6 +3,7 @@ import { profileReducer } from './profile';
 import { chatListReducer } from './chatList';
 import { messageListReducer } from './messageList';
 import { weatherReducer } from './weather';
+import { userReduser } from './user';
 
 import thunk from 'redux-thunk';
 import { persistStore, persistReducer } from 'redux-persist';
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
     profileReducer,
     chatListReducer,
     messageListReducer,
-    weatherReducer
+    weatherReducer,
+    userReduser
 });
 
 // оборачиваем редьюсеры в persist
