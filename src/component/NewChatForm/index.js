@@ -1,6 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Paper } from '@mui/material';
 
 export const NewChatForm = ({ addChat, cancelAddChat, visible }) => {
 
@@ -9,6 +9,13 @@ export const NewChatForm = ({ addChat, cancelAddChat, visible }) => {
     const onTextareaChange = useCallback((event) => {
         setTextareaValue(event.target.value)
     }, []);
+
+    const refTextarea = useRef(null);
+
+    useEffect(() => {
+        if (visible)
+            refTextarea.current?.focus();
+    }, [visible]);
 
     const btnOkClick = (event) => {
         event.preventDefault();
@@ -25,11 +32,11 @@ export const NewChatForm = ({ addChat, cancelAddChat, visible }) => {
     }
 
     return (
-        <form variant='outlined' square component='form' onSubmit={btnOkClick} style={!visible ? { display: 'none' } : {}}>
+        <Paper variant='outlined' square component='form' onSubmit={btnOkClick} style={!visible ? { display: 'none' } : {}}>
             <TextField id='standard-basic' label='Наименование чата' variant='standard' fullWidth
-                value={textareaValue} onChange={onTextareaChange} autoFocus />
+                value={textareaValue} onChange={onTextareaChange} inputRef={refTextarea} />
             <Button variant='outlined' type='submit'>ОК</Button>
             <Button variant='outlined' type='cancel' onClick={btnCancelClick}>Отмена</Button>
-        </form>
+        </Paper>
     )
 }

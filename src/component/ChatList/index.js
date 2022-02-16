@@ -4,11 +4,17 @@ import { List, ListItem, Avatar, ListItemAvatar, ListItemText, Menu, MenuItem } 
 import { Link } from 'react-router-dom';
 import { getChatByIdLink } from '../../navigation';
 
-export const ChatList = ({ chatList, chat, deleteChat }) => {
+import { useSelector } from 'react-redux';
+import { getChatList } from '../../store/chatList';
+
+export const ChatList = ({ selectedChatId, deleteChat }) => {
+
+    const chatList = useSelector(getChatList);
+
     const [contextMenu, setContextMenu] = useState(null);
 
     const handleContextMenu = (event) => {
-        console.log('aaa' + event.currentTarget);
+        //console.log('aaa' + event.currentTarget);
 
         event.preventDefault();
         setContextMenu(
@@ -39,8 +45,8 @@ export const ChatList = ({ chatList, chat, deleteChat }) => {
         <List class={styles.chatlist} >
             {
                 chatList.map(item =>
-                    <Link to={getChatByIdLink(item.id)}>
-                        <ListItem key={item.id} selected={chat && item.id === chat.id}
+                    <Link to={getChatByIdLink(item.id)} key={item.id}>
+                        <ListItem selected={item.id === selectedChatId}
                             onContextMenu={handleContextMenu} style={{ cursor: 'context-menu' }}
                             data-id={item.id}>
                             <ListItemAvatar>
@@ -67,5 +73,5 @@ export const ChatList = ({ chatList, chat, deleteChat }) => {
     )
 }
 
-// sx={{ width: '100%', maxWidth: 300, bgcolor: 'background.paper' }}
-//<Link to={`/chats/${item.id}`}>
+
+
