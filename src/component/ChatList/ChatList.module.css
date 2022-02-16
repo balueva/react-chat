@@ -4,3 +4,12 @@
     height: 100%;
     width: 100%;
 }
+
+.chatlist a {
+    text-decoration: none;
+    color: inherit;
+}
+/*
+.chatlist a:visited {
+    color: inherit;
+} */

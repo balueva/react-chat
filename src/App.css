@@ -1,6 +1,6 @@
 * {
   padding: 0;
-  margin: 0 auto;
+  /*margin: 0 auto;*/
   box-sizing: border-box;
 }
 
@@ -8,7 +8,20 @@
   height: 100vh;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+}
+
+.App > nav {
+  margin: 0 auto; /* временно, до переделки меню*/
+}
+.chats {
+display: flex;
+width: 100%;
+height: 100%;
+}
+
+.App nav > a {
+  padding: 0 10px;
 }
 
 .chatlistarea {
@@ -33,4 +46,6 @@
   background-color: rgb(218, 218, 218);
   padding: 10px 0;
   width: 100%;
+  display: flex;
+  justify-content: left;
 }
