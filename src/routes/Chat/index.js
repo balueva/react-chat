@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MessageList, NewMessageForm, MenuChat } from '../../component';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { getMessageListByChatId } from '../../store/messageList';
-import { addMessageWithThunkAction } from '../../store/messageList';
+import { addMessageCommand, addMessageTracker, addMessageOffTracker, getMessageListByChatId } from '../../store/messageList';
 
 export const Chat = ({ chat }) => {
 
     const messageList = useSelector(getMessageListByChatId(chat.id));
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        dispatch(addMessageTracker(chat.id));
+
+        return () => {
+            dispatch(addMessageOffTracker(chat.id));
+        }
+    }, [chat]);
+
     const addMessage = (author, text) => {
-        dispatch(addMessageWithThunkAction(chat.id, author, text));
+        dispatch(addMessageCommand(chat.id, author, text));
     };
 
     return (

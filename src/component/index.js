@@ -6,3 +6,4 @@ export * from './NewChatForm';
 export * from './MenuChatList';
 export * from './MenuChat';
 export * from './Error';
+export * from './WeatherHistoryList';

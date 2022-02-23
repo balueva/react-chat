@@ -1,4 +1,4 @@
-import { ADD_CHAT, DELETE_CHAT } from './actions';
+import { ADD_CHAT, DELETE_CHAT, RESET_CHATS } from './actions';
 
 /*
 const initialSate = {
@@ -11,14 +11,17 @@ const initialSate = {
     { id: '7', caption: 'Ольга', statusStr: '', isGroup: false, avatar: '' }]
 };
 */
-const initialSate = { chatList: [] };
+const initialState = { chatList: [] };
 
-export const chatListReducer = (state = initialSate, action) => {
+export const chatListReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_CHAT:
             return { ...state, chatList: [...state.chatList, action.payload] }
         case DELETE_CHAT:
             return { ...state, chatList: state.chatList.filter(item => item.id !== action.payload) }
-        default: return state;
+        case RESET_CHATS:
+            return initialState;
+        default:
+            return state;
     }
 };
