@@ -11,6 +11,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteMessagesByChatIdAction } from '../../store/messageList';
 
 
+export const getChatObject = (caption, statusStr = '', isGroup = false, avatar = '') => {
+    return { caption: caption, statusStr: statusStr, isGroup: isGroup, avatar: avatar };
+}
+
 export const Chats = () => {
 
     const [visibleNewChatForm, setVisibleNewChatForm] = useState(false);
@@ -36,7 +40,7 @@ export const Chats = () => {
     const addChat = (caption) => {
         setVisibleNewChatForm(false);
 
-        const newChat = { caption: caption, statusStr: '', isGroup: false, avatar: '' };
+        const newChat = getChatObject(caption); // { caption: caption, statusStr: '', isGroup: false, avatar: '' };
         dispatch(addChatCommand(newChat))
     }
 
